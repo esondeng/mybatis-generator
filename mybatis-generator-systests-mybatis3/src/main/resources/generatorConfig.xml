@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    ====
+           Copyright 2006-2020 the original author or authors.
+
+           Licensed under the Apache License, Version 2.0 (the "License");
+           you may not use this file except in compliance with the License.
+           You may obtain a copy of the License at
+
+              http://www.apache.org/licenses/LICENSE-2.0
+
+           Unless required by applicable law or agreed to in writing, software
+           distributed under the License is distributed on an "AS IS" BASIS,
+           WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+           See the License for the specific language governing permissions and
+           limitations under the License.
+    ====
+
+       Copyright 2006-2020 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <classPathEntry
+          location="/Users/dengxiaolin/mavenrepo/meituan/mysql/mysql-connector-java/5.1.37/mysql-connector-java-5.1.37.jar"/>
+
+  <context id="MysqlTables" targetRuntime="MyBatis3">
+    <!--去除注释-->
+    <commentGenerator type="DEFAULT">
+      <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+    <!--数据库连接-->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                    connectionURL="jdbc:mysql://10.24.90.86:5002/waimai_agent"
+                    userId="waimai_agent"
+                    password="puT8aJb8CbVJNY">
+    </jdbcConnection>
+    <!--生成实体类 指定包名-->
+    <javaModelGenerator targetPackage="com.sankuai.meituan.waimai.agent.template.domain"
+                        targetProject="src/main/java">
+      <property name="enableSubPackages" value="false"/>
+      <property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+
+    <!--生成SQLMAP文件-->
+    <sqlMapGenerator targetPackage="com.sankuai.meituan.waimai.agent.template.mapper" targetProject="src/main/java">
+      <property name="enableSubPackages" value="false"/>
+    </sqlMapGenerator>
+
+    <!--生成Dao文件 type属性和父节点的属性targetRuntime="MyBatis3"对应-->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.sankuai.meituan.waimai.agent.template.mapper"
+                         targetProject="src/main/java">
+      <property name="enableSubPackages" value="false"/>
+    </javaClientGenerator>
+
+
+    <table tableName="wm_agent_test" domainObjectName="Test">
+      <generatedKey column="id"  identity="true" sqlStatement="JDBC" />
+    </table>
+
+
+  </context>
+</generatorConfiguration>
