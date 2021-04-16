@@ -31,19 +31,31 @@ public class BaseColumnListElementGenerator extends AbstractXmlElementGenerator 
 
     @Override
     public void addElements(XmlElement parentElement) {
-        XmlElement answer = new XmlElement("sql"); //$NON-NLS-1$
+        XmlElement answer = new XmlElement("sql");
 
-        answer.addAttribute(new Attribute("id", //$NON-NLS-1$
-                introspectedTable.getBaseColumnListId()));
-
+        answer.addAttribute(new Attribute("id", introspectedTable.getBaseColumnListId()));
         context.getCommentGenerator().addComment(answer);
 
         StringBuilder sb = new StringBuilder();
-        Iterator<IntrospectedColumn> iter = introspectedTable
-                .getNonBLOBColumns().iterator();
+        Iterator<IntrospectedColumn> iter = introspectedTable.getNonBLOBColumns().iterator();
         while (iter.hasNext()) {
-            sb.append(MyBatis3FormattingUtilities.getSelectListPhrase(iter
-                    .next()));
+            sb.append(MyBatis3FormattingUtilities.getSelectListPhrase(iter.next()));
+
+            if (iter.hasNext()) {
+                sb.append(", ");
+            }
+
+            if (sb.length() > 80) {
+                answer.addElement(new TextElement(sb.toString()));
+                sb.setLength(0);
+            }
+        }
+
+        // 增加blob字段
+        iter = introspectedTable.getBLOBColumns().iterator();
+        while (iter.hasNext()) {
+            sb.append(", ");
+            sb.append(MyBatis3FormattingUtilities.getSelectListPhrase(iter.next()));
 
             if (iter.hasNext()) {
                 sb.append(", "); //$NON-NLS-1$

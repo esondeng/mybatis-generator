@@ -34,15 +34,8 @@ public class SelectByPrimaryKeyElementGenerator extends
     public void addElements(XmlElement parentElement) {
         XmlElement answer = new XmlElement("select"); //$NON-NLS-1$
 
-        answer.addAttribute(new Attribute(
-                "id", introspectedTable.getSelectByPrimaryKeyStatementId())); //$NON-NLS-1$
-        if (introspectedTable.getRules().generateResultMapWithBLOBs()) {
-            answer.addAttribute(new Attribute("resultMap", //$NON-NLS-1$
-                    introspectedTable.getResultMapWithBLOBsId()));
-        } else {
-            answer.addAttribute(new Attribute("resultMap", //$NON-NLS-1$
-                    introspectedTable.getBaseResultMapId()));
-        }
+        answer.addAttribute(new Attribute("id", introspectedTable.getSelectByPrimaryKeyStatementId())); //$NON-NLS-1$
+        answer.addAttribute(new Attribute("resultMap", introspectedTable.getBaseResultMapId()));
 
         String parameterType;
         if (introspectedTable.getRules().generatePrimaryKeyClass()) {
@@ -74,10 +67,6 @@ public class SelectByPrimaryKeyElementGenerator extends
         }
         answer.addElement(new TextElement(sb.toString()));
         answer.addElement(getBaseColumnListElement());
-        if (introspectedTable.hasBLOBColumns()) {
-            answer.addElement(new TextElement(",")); //$NON-NLS-1$
-            answer.addElement(getBlobColumnListElement());
-        }
 
         sb.setLength(0);
         sb.append("from "); //$NON-NLS-1$

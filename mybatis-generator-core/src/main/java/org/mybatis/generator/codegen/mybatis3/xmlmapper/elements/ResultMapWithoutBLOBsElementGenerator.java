@@ -17,6 +17,7 @@ package org.mybatis.generator.codegen.mybatis3.xmlmapper.elements;
 
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.mybatis.generator.api.IntrospectedColumn;
@@ -105,6 +106,26 @@ public class ResultMapWithoutBLOBsElementGenerator extends
                     introspectedColumn.getJdbcTypeName()));
 
             if (stringHasValue(introspectedColumn.getTypeHandler())) {
+                resultElement.addAttribute(new Attribute(
+                        "typeHandler", introspectedColumn.getTypeHandler())); //$NON-NLS-1$
+            }
+
+            answer.addElement(resultElement);
+        }
+
+        // 增加blob字段
+        for (IntrospectedColumn introspectedColumn : introspectedTable
+                .getBLOBColumns()) {
+            XmlElement resultElement = new XmlElement("result"); //$NON-NLS-1$
+
+            resultElement.addAttribute(generateColumnAttribute(introspectedColumn));
+            resultElement.addAttribute(new Attribute(
+                    "property", introspectedColumn.getJavaProperty())); //$NON-NLS-1$
+            resultElement.addAttribute(new Attribute(
+                    "jdbcType", introspectedColumn.getJdbcTypeName())); //$NON-NLS-1$
+
+            if (stringHasValue(introspectedColumn
+                    .getTypeHandler())) {
                 resultElement.addAttribute(new Attribute(
                         "typeHandler", introspectedColumn.getTypeHandler())); //$NON-NLS-1$
             }
