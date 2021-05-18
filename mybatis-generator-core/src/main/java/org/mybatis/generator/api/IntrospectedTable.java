@@ -412,7 +412,7 @@ public abstract class IntrospectedTable {
         setSelectByPrimaryKeyStatementId("getById"); //$NON-NLS-1$
         setUpdateByPrimaryKeyStatementId("update"); //$NON-NLS-1$
         setUpdateByPrimaryKeySelectiveStatementId("updateSelective"); //$NON-NLS-1$
-        setDeleteByPrimaryKeyStatementId("deleteById"); //$NON-NLS-1$
+        setDeleteByPrimaryKeyStatementId("softDeleteById"); //$NON-NLS-1$
         setInsertStatementId("insert"); //$NON-NLS-1$
         setBatchInsertStatementId("batchInsert"); //$NON-NLS-1$
         setInsertSelectiveStatementId("insertSelective"); //$NON-NLS-1$

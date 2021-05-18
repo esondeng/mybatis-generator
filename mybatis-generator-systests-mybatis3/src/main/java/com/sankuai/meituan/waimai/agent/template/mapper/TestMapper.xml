@@ -8,25 +8,25 @@
     <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
     <result column="utime" jdbcType="TIMESTAMP" property="utime" />
   </resultMap>
-  
+
   <sql id="Base_Column_List">
     id, name, valid, ctime, utime
   </sql>
-  
+
   <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from wm_agent_test
     where id = #{id,jdbcType=INTEGER}
   </select>
-  
+
   <update id="update" parameterType="com.sankuai.meituan.waimai.agent.template.domain.Test">
     update wm_agent_test
     set name = #{name,jdbcType=VARCHAR},
-      utime = now() 
+      utime = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
+
   <update id="updateSelective" parameterType="com.sankuai.meituan.waimai.agent.template.domain.Test">
     update wm_agent_test
     <set>
@@ -37,26 +37,26 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
+
   <update id="deleteById" parameterType="java.lang.Integer">
     update wm_agent_test set valid = 0, utime = now()
     where id = #{id,jdbcType=INTEGER} and valid = 1
   </update>
-  
+
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.sankuai.meituan.waimai.agent.template.domain.Test" useGeneratedKeys="true">
-    insert into wm_agent_test (name, valid, ctime, 
+    insert into wm_agent_test (name, valid, ctime,
       utime)
-    values (#{name,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, #{ctime,jdbcType=TIMESTAMP}, 
+    values (#{name,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, #{ctime,jdbcType=TIMESTAMP},
       #{utime,jdbcType=TIMESTAMP})
   </insert>
-  
+
   <insert id="batchInsert">
     <if test="items.get(0) != null">
-      insert into wm_agent_test (name, valid, ctime, 
+      insert into wm_agent_test (name, valid, ctime,
         utime)
       values
       <foreach collection="items" index="index" item="item" separator=",">
-        (#{item.name,jdbcType=VARCHAR}, #{item.valid,jdbcType=INTEGER}, #{item.ctime,jdbcType=TIMESTAMP}, 
+        (#{item.name,jdbcType=VARCHAR}, #{item.valid,jdbcType=INTEGER}, #{item.ctime,jdbcType=TIMESTAMP},
           #{item.utime,jdbcType=TIMESTAMP})
       </foreach>
     </if>

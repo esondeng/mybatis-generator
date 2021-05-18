@@ -9,7 +9,7 @@ public interface TabMapper {
 
     int updateSelective(Tab record);
 
-    int deleteById(Integer id);
+    int softDeleteById(Integer id);
 
     int insert(Tab record);
 
