@@ -33,6 +33,8 @@ public class TableConfiguration extends PropertyHolder {
 
     private boolean selectByPrimaryKeyStatementEnabled;
 
+    private boolean selectByPrimaryKeysStatementEnabled;
+
     private boolean selectByExampleStatementEnabled;
 
     private boolean updateByPrimaryKeyStatementEnabled;
@@ -52,6 +54,8 @@ public class TableConfiguration extends PropertyHolder {
     private GeneratedKey generatedKey;
 
     private String selectByPrimaryKeyQueryId;
+
+    private String selectByPrimaryKeysQueryId;
 
     private String selectByExampleQueryId;
 
@@ -94,6 +98,7 @@ public class TableConfiguration extends PropertyHolder {
         insertBatchStatementEnabled = true;
         insertSelectiveStatementEnabled = false;
         selectByPrimaryKeyStatementEnabled = true;
+        selectByPrimaryKeysStatementEnabled = true;
         selectByExampleStatementEnabled = false;
         updateByPrimaryKeyStatementEnabled = true;
         deleteByPrimaryKeyStatementEnabled = true;
@@ -142,6 +147,14 @@ public class TableConfiguration extends PropertyHolder {
     public void setSelectByPrimaryKeyStatementEnabled(
             boolean selectByPrimaryKeyStatementEnabled) {
         this.selectByPrimaryKeyStatementEnabled = selectByPrimaryKeyStatementEnabled;
+    }
+
+    public boolean isSelectByPrimaryKeysStatementEnabled() {
+        return selectByPrimaryKeysStatementEnabled;
+    }
+
+    public void setSelectByPrimaryKeysStatementEnabled(boolean selectByPrimaryKeysStatementEnabled) {
+        this.selectByPrimaryKeysStatementEnabled = selectByPrimaryKeysStatementEnabled;
     }
 
     public boolean isUpdateByPrimaryKeyStatementEnabled() {
@@ -255,6 +268,14 @@ public class TableConfiguration extends PropertyHolder {
 
     public void setSelectByPrimaryKeyQueryId(String selectByPrimaryKeyQueryId) {
         this.selectByPrimaryKeyQueryId = selectByPrimaryKeyQueryId;
+    }
+
+    public String getSelectByPrimaryKeysQueryId() {
+        return selectByPrimaryKeysQueryId;
+    }
+
+    public void setSelectByPrimaryKeysQueryId(String selectByPrimaryKeysQueryId) {
+        this.selectByPrimaryKeysQueryId = selectByPrimaryKeysQueryId;
     }
 
     public boolean isDeleteByExampleStatementEnabled() {

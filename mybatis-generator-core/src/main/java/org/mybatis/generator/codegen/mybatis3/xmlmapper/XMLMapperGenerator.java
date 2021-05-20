@@ -88,6 +88,7 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
         addBaseColumnListElement(answer);
 
         addSelectByPrimaryKeyElement(answer);
+        addSelectByIdsElement(answer);
         addUpdateByPrimaryKeyWithBLOBsElement(answer);
         addUpdateByPrimaryKeySelectiveElement(answer);
         addDeleteByPrimaryKeyElement(answer);
@@ -165,6 +166,11 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
             AbstractXmlElementGenerator elementGenerator = new SelectByPrimaryKeyElementGenerator();
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
+    }
+
+    protected void addSelectByIdsElement(XmlElement parentElement) {
+        AbstractXmlElementGenerator elementGenerator = new SelectByIdsElementGenerator();
+        initializeAndExecuteGenerator(elementGenerator, parentElement);
     }
 
     protected void addDeleteByExampleElement(XmlElement parentElement) {

@@ -160,6 +160,7 @@
   sqlProviderName CDATA #IMPLIED
   enableInsert CDATA #IMPLIED
   enableSelectByPrimaryKey CDATA #IMPLIED
+  enableSelectByPrimaryKeys CDATA #IMPLIED
   enableSelectByExample CDATA #IMPLIED
   enableUpdateByPrimaryKey CDATA #IMPLIED
   enableDeleteByPrimaryKey CDATA #IMPLIED

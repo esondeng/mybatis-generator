@@ -90,7 +90,7 @@ public class UpdateByPrimaryKeySelectiveElementGenerator extends
             isNotNullElement.addElement(new TextElement(sb.toString()));
         }
 
-        dynamicElement.addElement(new TextElement("  utime = now"));
+        dynamicElement.addElement(new TextElement("  utime = now()"));
 
         boolean and = false;
         for (IntrospectedColumn introspectedColumn : introspectedTable

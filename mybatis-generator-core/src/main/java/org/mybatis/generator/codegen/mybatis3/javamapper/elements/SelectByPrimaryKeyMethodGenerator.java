@@ -68,8 +68,7 @@ public class SelectByPrimaryKeyMethodGenerator extends
             }
             StringBuilder sb = new StringBuilder();
             for (IntrospectedColumn introspectedColumn : introspectedColumns) {
-                FullyQualifiedJavaType type = introspectedColumn
-                        .getFullyQualifiedJavaType();
+                FullyQualifiedJavaType type = introspectedColumn.getFullyQualifiedJavaType();
                 importedTypes.add(type);
                 Parameter parameter = new Parameter(type, introspectedColumn
                         .getJavaProperty());

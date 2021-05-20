@@ -82,6 +82,7 @@ public abstract class IntrospectedTable {
         ATTR_SELECT_BY_EXAMPLE_STATEMENT_ID,
         ATTR_SELECT_BY_EXAMPLE_WITH_BLOBS_STATEMENT_ID,
         ATTR_SELECT_BY_PRIMARY_KEY_STATEMENT_ID,
+        ATTR_SELECT_BY_PRIMARY_KEYS_STATEMENT_ID,
         ATTR_UPDATE_BY_EXAMPLE_STATEMENT_ID,
         ATTR_UPDATE_BY_EXAMPLE_SELECTIVE_STATEMENT_ID,
         ATTR_UPDATE_BY_EXAMPLE_WITH_BLOBS_STATEMENT_ID,
@@ -149,6 +150,10 @@ public abstract class IntrospectedTable {
 
     public String getSelectByPrimaryKeyQueryId() {
         return tableConfiguration.getSelectByPrimaryKeyQueryId();
+    }
+
+    public String getSelectByPrimaryKeysQueryId() {
+        return tableConfiguration.getSelectByPrimaryKeysQueryId();
     }
 
     public GeneratedKey getGeneratedKey() {
@@ -409,7 +414,8 @@ public abstract class IntrospectedTable {
         setSqlMapFullyQualifiedRuntimeTableName(calculateSqlMapFullyQualifiedRuntimeTableName());
         setSqlMapAliasedFullyQualifiedRuntimeTableName(calculateSqlMapAliasedFullyQualifiedRuntimeTableName());
 
-        setSelectByPrimaryKeyStatementId("getById"); //$NON-NLS-1$
+        setSelectByPrimaryKeyStatementId("getById");
+        setSelectByPrimaryKeysStatementId("getByIds");//$NON-NLS-1$
         setUpdateByPrimaryKeyStatementId("update"); //$NON-NLS-1$
         setUpdateByPrimaryKeySelectiveStatementId("updateSelective"); //$NON-NLS-1$
         setDeleteByPrimaryKeyStatementId("softDeleteById"); //$NON-NLS-1$
@@ -502,6 +508,11 @@ public abstract class IntrospectedTable {
     public void setSelectByPrimaryKeyStatementId(String s) {
         internalAttributes.put(
                 InternalAttribute.ATTR_SELECT_BY_PRIMARY_KEY_STATEMENT_ID, s);
+    }
+
+    public void setSelectByPrimaryKeysStatementId(String s) {
+        internalAttributes.put(
+                InternalAttribute.ATTR_SELECT_BY_PRIMARY_KEYS_STATEMENT_ID, s);
     }
 
     public void setSelectByExampleWithBLOBsStatementId(String s) {
@@ -612,6 +623,11 @@ public abstract class IntrospectedTable {
     public String getSelectByPrimaryKeyStatementId() {
         return internalAttributes
                 .get(InternalAttribute.ATTR_SELECT_BY_PRIMARY_KEY_STATEMENT_ID);
+    }
+
+    public String getSelectByPrimaryKeysStatementId() {
+        return internalAttributes
+                .get(InternalAttribute.ATTR_SELECT_BY_PRIMARY_KEYS_STATEMENT_ID);
     }
 
     public String getSelectByExampleWithBLOBsStatementId() {

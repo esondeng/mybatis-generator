@@ -35,6 +35,7 @@ import org.mybatis.generator.codegen.mybatis3.javamapper.elements.InsertMethodGe
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.InsertSelectiveMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByExampleWithBLOBsMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByExampleWithoutBLOBsMethodGenerator;
+import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByIdsMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByPrimaryKeyMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.UpdateByExampleSelectiveMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.UpdateByExampleWithBLOBsMethodGenerator;
@@ -104,6 +105,7 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
 
 
         addSelectByPrimaryKeyMethod(interfaze);
+        addSelectByPrimaryKeysMethod(interfaze);
         addUpdateByPrimaryKeyWithoutBLOBsMethod(interfaze);
         addUpdateByPrimaryKeySelectiveMethod(interfaze);
         addDeleteByPrimaryKeyMethod(interfaze);
@@ -186,6 +188,11 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
             AbstractJavaMapperMethodGenerator methodGenerator = new SelectByPrimaryKeyMethodGenerator(false);
             initializeAndExecuteGenerator(methodGenerator, interfaze);
         }
+    }
+
+    protected void addSelectByPrimaryKeysMethod(Interface interfaze) {
+        SelectByIdsMethodGenerator methodGenerator = new SelectByIdsMethodGenerator();
+        initializeAndExecuteGenerator(methodGenerator, interfaze);
     }
 
     protected void addUpdateByExampleSelectiveMethod(Interface interfaze) {

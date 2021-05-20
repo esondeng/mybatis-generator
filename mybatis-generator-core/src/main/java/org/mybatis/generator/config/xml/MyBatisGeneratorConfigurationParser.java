@@ -66,7 +66,8 @@ public class MyBatisGeneratorConfigurationParser {
         super();
         if (extraProperties == null) {
             this.extraProperties = new Properties();
-        } else {
+        }
+        else {
             this.extraProperties = extraProperties;
         }
         configurationProperties = new Properties();
@@ -87,9 +88,11 @@ public class MyBatisGeneratorConfigurationParser {
 
             if ("properties".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseProperties(childNode);
-            } else if ("classPathEntry".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("classPathEntry".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseClassPathEntry(configuration, childNode);
-            } else if ("context".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("context".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseContext(configuration, childNode);
             }
         }
@@ -122,7 +125,8 @@ public class MyBatisGeneratorConfigurationParser {
                     throw new XMLParserException(getString(
                             "RuntimeError.15", resource)); //$NON-NLS-1$
                 }
-            } else {
+            }
+            else {
                 resourceUrl = new URL(url);
             }
 
@@ -131,11 +135,13 @@ public class MyBatisGeneratorConfigurationParser {
 
             configurationProperties.load(inputStream);
             inputStream.close();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             if (stringHasValue(resource)) {
                 throw new XMLParserException(getString(
                         "RuntimeError.16", resource)); //$NON-NLS-1$
-            } else {
+            }
+            else {
                 throw new XMLParserException(getString(
                         "RuntimeError.17", url)); //$NON-NLS-1$
             }
@@ -175,23 +181,32 @@ public class MyBatisGeneratorConfigurationParser {
 
             if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseProperty(context, childNode);
-            } else if ("plugin".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("plugin".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parsePlugin(context, childNode);
-            } else if ("commentGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("commentGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseCommentGenerator(context, childNode);
-            } else if ("jdbcConnection".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("jdbcConnection".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJdbcConnection(context, childNode);
-            } else if ("connectionFactory".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("connectionFactory".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseConnectionFactory(context, childNode);
-            } else if ("javaModelGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("javaModelGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaModelGenerator(context, childNode);
-            } else if ("javaTypeResolver".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("javaTypeResolver".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaTypeResolver(context, childNode);
-            } else if ("sqlMapGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("sqlMapGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseSqlMapGenerator(context, childNode);
-            } else if ("javaClientGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("javaClientGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaClientGenerator(context, childNode);
-            } else if ("table".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("table".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseTable(context, childNode);
             }
         }
@@ -260,11 +275,14 @@ public class MyBatisGeneratorConfigurationParser {
         }
 
 
-        String enableSelectByPrimaryKey = attributes
-                .getProperty("enableSelectByPrimaryKey"); //$NON-NLS-1$
+        String enableSelectByPrimaryKey = attributes.getProperty("enableSelectByPrimaryKey"); //$NON-NLS-1$
         if (stringHasValue(enableSelectByPrimaryKey)) {
-            tc.setSelectByPrimaryKeyStatementEnabled(
-                    isTrue(enableSelectByPrimaryKey));
+            tc.setSelectByPrimaryKeyStatementEnabled(isTrue(enableSelectByPrimaryKey));
+        }
+
+        String enableSelectByPrimaryKeys = attributes.getProperty("enableSelectByPrimaryKeys"); //$NON-NLS-1$
+        if (stringHasValue(enableSelectByPrimaryKeys)) {
+            tc.setSelectByPrimaryKeysStatementEnabled(isTrue(enableSelectByPrimaryKeys));
         }
 
         String enableSelectByExample = attributes
@@ -312,10 +330,14 @@ public class MyBatisGeneratorConfigurationParser {
             tc.setUpdateByExampleStatementEnabled(false);
         }
 
-        String selectByPrimaryKeyQueryId = attributes
-                .getProperty("selectByPrimaryKeyQueryId"); //$NON-NLS-1$
+        String selectByPrimaryKeyQueryId = attributes.getProperty("selectByPrimaryKeyQueryId"); //$NON-NLS-1$
         if (stringHasValue(selectByPrimaryKeyQueryId)) {
             tc.setSelectByPrimaryKeyQueryId(selectByPrimaryKeyQueryId);
+        }
+
+        String selectByPrimaryKeysQueryId = attributes.getProperty("selectByPrimaryKeysQueryId"); //$NON-NLS-1$
+        if (stringHasValue(selectByPrimaryKeysQueryId)) {
+            tc.setSelectByPrimaryKeysQueryId(selectByPrimaryKeysQueryId);
         }
 
         String selectByExampleQueryId = attributes
@@ -365,17 +387,23 @@ public class MyBatisGeneratorConfigurationParser {
 
             if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseProperty(tc, childNode);
-            } else if ("columnOverride".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("columnOverride".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseColumnOverride(tc, childNode);
-            } else if ("ignoreColumn".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("ignoreColumn".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseIgnoreColumn(tc, childNode);
-            } else if ("ignoreColumnsByRegex".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("ignoreColumnsByRegex".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseIgnoreColumnByRegex(tc, childNode);
-            } else if ("generatedKey".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("generatedKey".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseGeneratedKey(tc, childNode);
-            } else if ("domainObjectRenamingRule".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("domainObjectRenamingRule".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseDomainObjectRenamingRule(tc, childNode);
-            } else if ("columnRenamingRule".equals(childNode.getNodeName())) { //$NON-NLS-1$
+            }
+            else if ("columnRenamingRule".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseColumnRenamingRule(tc, childNode);
             }
         }
@@ -740,7 +768,8 @@ public class MyBatisGeneratorConfigurationParser {
             if (propertyValue == null) {
                 // add the property marker back into the stream
                 answer.add(s.substring(markerStartIndex, markerEndIndex + 1));
-            } else {
+            }
+            else {
                 answer.add(propertyValue);
             }
 
@@ -817,7 +846,7 @@ public class MyBatisGeneratorConfigurationParser {
      *
      * @param key property key
      * @return the resolved property.  This method will return null if the property is
-     *     undefined in any of the sources.
+     * undefined in any of the sources.
      */
     private String resolveProperty(String key) {
         String property = System.getProperty(key);
