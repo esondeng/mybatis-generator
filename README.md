@@ -3,13 +3,18 @@
 ### Mapper 注解， 生成下面简化风格的
 @Mapper
 public interface TabMapper {
+
     Tab getById(Integer id);
+
+    List<Tab> getByIds(@Param("ids")List<Integer> ids);
 
     int update(Tab record);
 
     int updateSelective(Tab record);
 
     int softDeleteById(Integer id);
+
+    int softDeleteByIds(@Param("ids")List<Integer> ids);
 
     int insert(Tab record);
 
