@@ -34,7 +34,9 @@ public class DeleteByIdsMethodGenerator extends AbstractJavaMapperMethodGenerato
         importedTypes.add(type);
 
         String paramName = primaryKey.getJavaProperty() + "s";
-        Parameter parameter = new Parameter(type, paramName);
+        FullyQualifiedJavaType parameterType = FullyQualifiedJavaType.getNewListInstance();
+        parameterType.addTypeArgument(type);
+        Parameter parameter = new Parameter(parameterType, paramName);
 
         sb.append("@Param(\"");
         sb.append(paramName);
