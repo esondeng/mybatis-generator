@@ -22,6 +22,7 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.codegen.AbstractXmlGenerator;
 import org.mybatis.generator.codegen.XmlConstants;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.AbstractXmlElementGenerator;
+import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.AddDeleteByIdsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.BaseColumnListElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.BatchInsertElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.BlobColumnListElementGenerator;
@@ -35,6 +36,7 @@ import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.ResultMapWithBL
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.ResultMapWithoutBLOBsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByExampleWithBLOBsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByExampleWithoutBLOBsElementGenerator;
+import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByIdsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByPrimaryKeyElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.UpdateByExampleSelectiveElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.UpdateByExampleWithBLOBsElementGenerator;
@@ -92,6 +94,7 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
         addUpdateByPrimaryKeyWithBLOBsElement(answer);
         addUpdateByPrimaryKeySelectiveElement(answer);
         addDeleteByPrimaryKeyElement(answer);
+        addDeleteByIdsElement(answer);
 
         addInsertElement(answer);
         addBatchInsertElement(answer);
@@ -185,6 +188,11 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
             AbstractXmlElementGenerator elementGenerator = new DeleteByPrimaryKeyElementGenerator(false);
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
+    }
+
+    protected void addDeleteByIdsElement(XmlElement parentElement) {
+        AbstractXmlElementGenerator elementGenerator = new AddDeleteByIdsElementGenerator();
+        initializeAndExecuteGenerator(elementGenerator, parentElement);
     }
 
     protected void addInsertElement(XmlElement parentElement) {

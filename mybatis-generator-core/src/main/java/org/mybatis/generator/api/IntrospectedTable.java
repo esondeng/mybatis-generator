@@ -75,6 +75,7 @@ public abstract class IntrospectedTable {
         ATTR_COUNT_BY_EXAMPLE_STATEMENT_ID,
         ATTR_DELETE_BY_EXAMPLE_STATEMENT_ID,
         ATTR_DELETE_BY_PRIMARY_KEY_STATEMENT_ID,
+        ATTR_DELETE_BY_IDS_STATEMENT_ID,
         ATTR_INSERT_STATEMENT_ID,
         ATTR_BATCH_INSERT_STATEMENT_ID,
         ATTR_INSERT_SELECTIVE_STATEMENT_ID,
@@ -419,6 +420,7 @@ public abstract class IntrospectedTable {
         setUpdateByPrimaryKeyStatementId("update"); //$NON-NLS-1$
         setUpdateByPrimaryKeySelectiveStatementId("updateSelective"); //$NON-NLS-1$
         setDeleteByPrimaryKeyStatementId("softDeleteById"); //$NON-NLS-1$
+        setDeleteByIdsStatementId("softDeleteByIds");
         setInsertStatementId("insert"); //$NON-NLS-1$
         setBatchInsertStatementId("batchInsert"); //$NON-NLS-1$
         setInsertSelectiveStatementId("insertSelective"); //$NON-NLS-1$
@@ -550,6 +552,11 @@ public abstract class IntrospectedTable {
                 InternalAttribute.ATTR_DELETE_BY_PRIMARY_KEY_STATEMENT_ID, s);
     }
 
+    public void setDeleteByIdsStatementId(String s) {
+        internalAttributes.put(
+                InternalAttribute.ATTR_DELETE_BY_IDS_STATEMENT_ID, s);
+    }
+
     public void setDeleteByExampleStatementId(String s) {
         internalAttributes.put(
                 InternalAttribute.ATTR_DELETE_BY_EXAMPLE_STATEMENT_ID, s);
@@ -663,6 +670,11 @@ public abstract class IntrospectedTable {
     public String getDeleteByPrimaryKeyStatementId() {
         return internalAttributes
                 .get(InternalAttribute.ATTR_DELETE_BY_PRIMARY_KEY_STATEMENT_ID);
+    }
+
+    public String getDeleteByIdsStatementId(){
+        return internalAttributes
+                .get(InternalAttribute.ATTR_DELETE_BY_IDS_STATEMENT_ID);
     }
 
     public String getDeleteByExampleStatementId() {

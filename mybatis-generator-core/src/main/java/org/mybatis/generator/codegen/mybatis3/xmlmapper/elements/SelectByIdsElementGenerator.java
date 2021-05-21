@@ -1,4 +1,4 @@
-package org.mybatis.generator.codegen.mybatis3.xmlmapper;
+package org.mybatis.generator.codegen.mybatis3.xmlmapper.elements;
 
 import java.util.List;
 
@@ -39,10 +39,10 @@ public class SelectByIdsElementGenerator extends AbstractXmlElementGenerator {
         XmlElement forEachElement = new XmlElement("foreach");
         forEachElement.addAttribute(new Attribute("collection", collectionName));
         forEachElement.addAttribute(new Attribute("item", primaryKey.getJavaProperty()));
-        forEachElement.addAttribute(new Attribute("index", "index"));
-        forEachElement.addAttribute(new Attribute("separator", ","));
         forEachElement.addAttribute(new Attribute("open", "("));
         forEachElement.addAttribute(new Attribute("close", ")"));
+        forEachElement.addAttribute(new Attribute("index", "index"));
+        forEachElement.addAttribute(new Attribute("separator", ","));
 
         forEachElement.addElement(new TextElement(MyBatis3FormattingUtilities.getParameterClause(primaryKey, null)));
         answer.addElement(forEachElement);
