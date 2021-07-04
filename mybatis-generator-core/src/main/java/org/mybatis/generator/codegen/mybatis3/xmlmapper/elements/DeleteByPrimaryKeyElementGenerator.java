@@ -60,7 +60,7 @@ public class DeleteByPrimaryKeyElementGenerator extends
         StringBuilder sb = new StringBuilder();
         sb.append("update "); //$NON-NLS-1$
         sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
-        sb.append(" set valid = 0, utime = now()");
+        sb.append(" set valid = 0, update_time = now()");
         answer.addElement(new TextElement(sb.toString()));
 
         boolean and = false;

@@ -21,7 +21,7 @@ public class AddDeleteByIdsElementGenerator extends AbstractXmlElementGenerator 
         StringBuilder sb = new StringBuilder();
         sb.append("update ");
         sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
-        sb.append(" set valid = 0, utime = now()");
+        sb.append(" set valid = 0, update_time = now()");
         answer.addElement(new TextElement(sb.toString()));
 
         // only support one column primary key

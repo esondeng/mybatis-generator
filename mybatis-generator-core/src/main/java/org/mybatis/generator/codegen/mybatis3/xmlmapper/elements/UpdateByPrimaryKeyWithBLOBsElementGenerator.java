@@ -65,11 +65,11 @@ public class UpdateByPrimaryKeyWithBLOBsElementGenerator extends
                 .getNonPrimaryKeyColumns()).iterator();
         while (iter.hasNext()) {
             IntrospectedColumn introspectedColumn = iter.next();
-            if (introspectedColumn.getActualColumnName().equals("ctime")) {
+            if (introspectedColumn.getActualColumnName().equals("create_time")) {
                 continue;
             }
 
-            if (introspectedColumn.getActualColumnName().equals("utime")) {
+            if (introspectedColumn.getActualColumnName().equals("update_time")) {
                 continue;
             }
 
@@ -77,9 +77,8 @@ public class UpdateByPrimaryKeyWithBLOBsElementGenerator extends
                 continue;
             }
 
-            sb.append(MyBatis3FormattingUtilities
-                    .getEscapedColumnName(introspectedColumn));
-            sb.append(" = "); //$NON-NLS-1$
+            sb.append(MyBatis3FormattingUtilities.getEscapedColumnName(introspectedColumn));
+            sb.append(" = ");
             sb.append(MyBatis3FormattingUtilities
                     .getParameterClause(introspectedColumn));
 
@@ -94,7 +93,7 @@ public class UpdateByPrimaryKeyWithBLOBsElementGenerator extends
             }
         }
 
-        answer.addElement(new TextElement("  utime = now"));
+        answer.addElement(new TextElement("  update_time = now()"));
 
         boolean and = false;
         for (IntrospectedColumn introspectedColumn : introspectedTable

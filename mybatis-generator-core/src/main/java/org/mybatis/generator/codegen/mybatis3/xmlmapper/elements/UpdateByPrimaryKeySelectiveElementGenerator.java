@@ -60,11 +60,11 @@ public class UpdateByPrimaryKeySelectiveElementGenerator extends
 
         for (IntrospectedColumn introspectedColumn :
                 ListUtilities.removeGeneratedAlwaysColumns(introspectedTable.getNonPrimaryKeyColumns())) {
-            if(introspectedColumn.getActualColumnName().equals("ctime")){
+            if(introspectedColumn.getActualColumnName().equals("create_time")){
                 continue;
             }
 
-            if(introspectedColumn.getActualColumnName().equals("utime")){
+            if(introspectedColumn.getActualColumnName().equals("update_time")){
                 continue;
             }
 
@@ -90,7 +90,7 @@ public class UpdateByPrimaryKeySelectiveElementGenerator extends
             isNotNullElement.addElement(new TextElement(sb.toString()));
         }
 
-        dynamicElement.addElement(new TextElement("  utime = now()"));
+        dynamicElement.addElement(new TextElement("  update_time = now()"));
 
         boolean and = false;
         for (IntrospectedColumn introspectedColumn : introspectedTable
