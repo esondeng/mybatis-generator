@@ -1,6 +1,6 @@
-package com.sankuai.meituan.waimai.agent.template.mapper;
+package cn.egenie.architect.demo.product.mapper;
 
-import com.sankuai.meituan.waimai.agent.template.domain.Test;
+import cn.egenie.architect.demo.product.domain.Test;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -9,11 +9,15 @@ import org.apache.ibatis.annotations.Param;
 public interface TestMapper {
     Test getById(Integer id);
 
+    List<Test> getByIds(@Param("ids") List<Integer> ids);
+
     int update(Test record);
 
     int updateSelective(Test record);
 
-    int deleteById(Integer id);
+    int softDeleteById(Integer id);
+
+    int softDeleteByIds(@Param("ids") List<Integer> ids);
 
     int insert(Test record);
 

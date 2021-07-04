@@ -1,4 +1,4 @@
-package com.sankuai.meituan.waimai.agent.template.domain;
+package cn.egenie.architect.demo.product.domain;
 
 import java.util.Date;
 import lombok.Getter;
@@ -13,7 +13,7 @@ public class Test {
 
     private Integer valid;
 
-    private Date ctime;
+    private Date createTime;
 
-    private Date utime;
+    private Date updateTime;
 }

@@ -48,27 +48,27 @@
     <!--数据库连接-->
     <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                     connectionURL="jdbc:mysql://localhost:3306/test"
-                    userId="admin"
-                    password="123abc">
+                    userId="root"
+                    password="D123213@">
     </jdbcConnection>
     <!--生成实体类 指定包名-->
-    <javaModelGenerator targetPackage="com.sankuai.meituan.waimai.agent.template.domain"
+    <javaModelGenerator targetPackage="cn.egenie.architect.demo.product.domain"
                         targetProject="src/main/java">
       <property name="enableSubPackages" value="false"/>
       <property name="trimStrings" value="true"/>
     </javaModelGenerator>
 
     <!--生成SQLMAP文件-->
-    <sqlMapGenerator targetPackage="com.sankuai.meituan.waimai.agent.template.mapper" targetProject="src/main/java">
+    <sqlMapGenerator targetPackage="cn.egenie.architect.demo.product.mapper" targetProject="src/main/java">
       <property name="enableSubPackages" value="false"/>
     </sqlMapGenerator>
 
     <!--生成Dao文件 type属性和父节点的属性targetRuntime="MyBatis3"对应-->
-    <javaClientGenerator type="XMLMAPPER" targetPackage="com.sankuai.meituan.waimai.agent.template.mapper" targetProject="src/main/java">
+    <javaClientGenerator type="XMLMAPPER" targetPackage="cn.egenie.architect.demo.product.mapper" targetProject="src/main/java">
       <property name="enableSubPackages" value="false"/>
     </javaClientGenerator>
 
-    <table tableName="authority_group" domainObjectName="AuthorityGroup">
+    <table tableName="test" domainObjectName="Test">
       <generatedKey column="id"  identity="true" sqlStatement="JDBC" />
     </table>
 
