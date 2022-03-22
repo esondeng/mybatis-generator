@@ -45,6 +45,19 @@ public class DeleteByIdsMethodGenerator extends AbstractJavaMapperMethodGenerato
 
         method.addParameter(parameter);
 
+
+        boolean hasLastUpdater = introspectedTable.getColumn("last_updater").isPresent();
+        if(hasLastUpdater){
+            IntrospectedColumn lastUpdater = introspectedTable.getColumn("last_updater").get();
+            Parameter lastUpdaterParameter = new Parameter(lastUpdater.getFullyQualifiedJavaType(), lastUpdater.getJavaProperty());
+            sb.setLength(0);
+            sb.append("@Param(\"");
+            sb.append(lastUpdater.getJavaProperty());
+            sb.append("\")");
+            lastUpdaterParameter.addAnnotation(sb.toString());
+            method.addParameter(lastUpdaterParameter);
+        }
+
         context.getCommentGenerator().addGeneralMethodComment(method, introspectedTable);
 
         interfaze.addImportedTypes(importedTypes);

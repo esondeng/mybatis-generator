@@ -61,11 +61,26 @@ public class DeleteByPrimaryKeyElementGenerator extends
         sb.append("update "); //$NON-NLS-1$
         sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
         boolean isHasValidColumn = introspectedTable.getColumn("valid").isPresent();
+        boolean hasLastUpdater = introspectedTable.getColumn("last_updater").isPresent();
+        boolean hasLastUpdateTime = introspectedTable.getColumn("last_update_time").isPresent();
+
         if(isHasValidColumn){
-            sb.append(" set valid = 0, update_time = now()");
+            sb.append(" set valid = 0, ");
         }
         else{
-            sb.append(" set is_usable = 0, update_time = now()");
+            sb.append(" set is_usable = 0, ");
+        }
+
+        if(hasLastUpdater){
+            String jdbcType = introspectedTable.getColumn("last_updater").get().getJdbcTypeName();
+            sb.append("hasLastUpdater = #{hasLastUpdater,jdbcType=").append(jdbcType).append("}, ");
+        }
+
+        if(hasLastUpdateTime){
+            sb.append("last_update_time = now()");
+        }
+        else {
+            sb.append("update_time = now()");
         }
 
         answer.addElement(new TextElement(sb.toString()));

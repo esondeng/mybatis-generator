@@ -54,20 +54,20 @@ public class DeleteByPrimaryKeyMethodGenerator extends
             // if more than one PK field, then we need to annotate the
             // parameters
             // for MyBatis
-            List<IntrospectedColumn> introspectedColumns = introspectedTable
-                    .getPrimaryKeyColumns();
-            boolean annotate = introspectedColumns.size() > 1;
+            List<IntrospectedColumn> introspectedColumns = introspectedTable.getPrimaryKeyColumns();
+            boolean hasLastUpdater = introspectedTable.getColumn("last_updater").isPresent();
+            boolean annotate = hasLastUpdater || introspectedColumns.size() > 1;
             if (annotate) {
-                importedTypes.add(new FullyQualifiedJavaType(
-                        "org.apache.ibatis.annotations.Param")); //$NON-NLS-1$
+                importedTypes.add(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Param"));
             }
             StringBuilder sb = new StringBuilder();
+
+
+
             for (IntrospectedColumn introspectedColumn : introspectedColumns) {
-                FullyQualifiedJavaType type = introspectedColumn
-                        .getFullyQualifiedJavaType();
+                FullyQualifiedJavaType type = introspectedColumn.getFullyQualifiedJavaType();
                 importedTypes.add(type);
-                Parameter parameter = new Parameter(type, introspectedColumn
-                        .getJavaProperty());
+                Parameter parameter = new Parameter(type, introspectedColumn.getJavaProperty());
                 if (annotate) {
                     sb.setLength(0);
                     sb.append("@Param(\""); //$NON-NLS-1$
@@ -77,11 +77,20 @@ public class DeleteByPrimaryKeyMethodGenerator extends
                 }
                 method.addParameter(parameter);
             }
+
+            if(hasLastUpdater){
+                IntrospectedColumn lastUpdater = introspectedTable.getColumn("last_updater").get();
+                Parameter parameter = new Parameter(lastUpdater.getFullyQualifiedJavaType(), lastUpdater.getJavaProperty());
+                sb.setLength(0);
+                sb.append("@Param(\"");
+                sb.append(lastUpdater.getJavaProperty());
+                sb.append("\")");
+                parameter.addAnnotation(sb.toString());
+                method.addParameter(parameter);
+            }
         }
 
-        context.getCommentGenerator().addGeneralMethodComment(method,
-                introspectedTable);
-
+        context.getCommentGenerator().addGeneralMethodComment(method, introspectedTable);
         addMapperAnnotations(method);
 
         if (context.getPlugins().clientDeleteByPrimaryKeyMethodGenerated(
