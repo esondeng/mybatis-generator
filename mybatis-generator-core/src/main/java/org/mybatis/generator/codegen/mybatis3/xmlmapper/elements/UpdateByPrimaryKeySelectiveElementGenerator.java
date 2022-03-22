@@ -72,6 +72,10 @@ public class UpdateByPrimaryKeySelectiveElementGenerator extends
                 continue;
             }
 
+            if(introspectedColumn.getActualColumnName().equals("is_usable")){
+                continue;
+            }
+
             sb.setLength(0);
             sb.append(introspectedColumn.getJavaProperty());
             sb.append(" != null"); //$NON-NLS-1$

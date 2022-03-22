@@ -21,7 +21,13 @@ public class AddDeleteByIdsElementGenerator extends AbstractXmlElementGenerator 
         StringBuilder sb = new StringBuilder();
         sb.append("update ");
         sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
-        sb.append(" set valid = 0, update_time = now()");
+        boolean isHasValidColumn = introspectedTable.getColumn("valid").isPresent();
+        if(isHasValidColumn){
+            sb.append(" set valid = 0, update_time = now()");
+        }
+        else{
+            sb.append(" set is_usable = 0, update_time = now()");
+        }
         answer.addElement(new TextElement(sb.toString()));
 
         // only support one column primary key
@@ -39,7 +45,13 @@ public class AddDeleteByIdsElementGenerator extends AbstractXmlElementGenerator 
 
         forEachElement.addElement(new TextElement(MyBatis3FormattingUtilities.getParameterClause(primaryKey, null)));
         answer.addElement(forEachElement);
-        answer.addElement(new TextElement(" and valid = 1"));
+        if(isHasValidColumn){
+            answer.addElement(new TextElement(" and valid = 1"));
+        }
+        else {
+            answer.addElement(new TextElement(" and is_usable = 1"));
+        }
+
 
         parentElement.addElement(answer);
         parentElement.addElement(new TextElement(""));
