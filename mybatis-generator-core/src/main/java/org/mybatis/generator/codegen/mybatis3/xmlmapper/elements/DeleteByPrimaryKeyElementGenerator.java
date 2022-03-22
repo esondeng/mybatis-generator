@@ -60,7 +60,8 @@ public class DeleteByPrimaryKeyElementGenerator extends
         StringBuilder sb = new StringBuilder();
         sb.append("update "); //$NON-NLS-1$
         sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
-        if(introspectedTable.getColumn("valid").isPresent()){
+        boolean isHasValidColumn = introspectedTable.getColumn("valid").isPresent();
+        if(isHasValidColumn){
             sb.append(" set valid = 0, update_time = now()");
         }
         else{
@@ -87,7 +88,14 @@ public class DeleteByPrimaryKeyElementGenerator extends
             sb.append(MyBatis3FormattingUtilities.getParameterClause(introspectedColumn));
         }
 
-        sb.append(" and valid = 1");
+        if(isHasValidColumn){
+            sb.append(" and valid = 1");
+        }
+        else
+        {
+            sb.append(" and is_usable = 1");
+        }
+
         answer.addElement(new TextElement(sb.toString()));
 
         if (context.getPlugins()
