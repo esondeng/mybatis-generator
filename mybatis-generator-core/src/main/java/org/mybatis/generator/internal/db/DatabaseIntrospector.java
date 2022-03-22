@@ -269,6 +269,9 @@ public class DatabaseIntrospector {
                 if (pattern == null) {
                     calculatedColumnName = introspectedColumn
                             .getActualColumnName();
+                    if(calculatedColumnName.startsWith("is_")){
+                        calculatedColumnName = calculatedColumnName.substring("is_".length());
+                    }
                 }
                 else {
                     Matcher matcher = pattern.matcher(introspectedColumn

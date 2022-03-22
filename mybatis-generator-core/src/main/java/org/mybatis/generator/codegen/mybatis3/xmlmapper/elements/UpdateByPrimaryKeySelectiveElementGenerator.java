@@ -68,6 +68,10 @@ public class UpdateByPrimaryKeySelectiveElementGenerator extends
                 continue;
             }
 
+            if(introspectedColumn.getActualColumnName().equals("last_update_time")){
+                continue;
+            }
+
             if(introspectedColumn.getActualColumnName().equals("valid")){
                 continue;
             }
@@ -94,7 +98,12 @@ public class UpdateByPrimaryKeySelectiveElementGenerator extends
             isNotNullElement.addElement(new TextElement(sb.toString()));
         }
 
-        dynamicElement.addElement(new TextElement("  update_time = now()"));
+        if(introspectedTable.getColumn("update_time").isPresent()){
+            dynamicElement.addElement(new TextElement("  update_time = now()"));
+        }
+        else{
+            dynamicElement.addElement(new TextElement("  last_update_time = now()"));
+        }
 
         boolean and = false;
         for (IntrospectedColumn introspectedColumn : introspectedTable

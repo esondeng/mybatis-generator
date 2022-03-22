@@ -73,6 +73,10 @@ public class UpdateByPrimaryKeyWithBLOBsElementGenerator extends
                 continue;
             }
 
+            if (introspectedColumn.getActualColumnName().equals("last_update_time")) {
+                continue;
+            }
+
             if (introspectedColumn.getActualColumnName().equals("valid")) {
                 continue;
             }
@@ -97,7 +101,13 @@ public class UpdateByPrimaryKeyWithBLOBsElementGenerator extends
             }
         }
 
-        answer.addElement(new TextElement("  update_time = now()"));
+        if(introspectedTable.getColumn("update_time").isPresent()){
+            answer.addElement(new TextElement("  update_time = now()"));
+        }
+        else{
+            answer.addElement(new TextElement("  last_update_time = now()"));
+        }
+
 
         boolean and = false;
         for (IntrospectedColumn introspectedColumn : introspectedTable
