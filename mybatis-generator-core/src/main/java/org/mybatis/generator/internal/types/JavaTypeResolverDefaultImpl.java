@@ -147,6 +147,10 @@ public class JavaTypeResolverDefaultImpl implements JavaTypeResolver {
             answer = overrideDefaultType(introspectedColumn, answer);
         }
 
+        if(introspectedColumn.getActualColumnName().startsWith("is_")){
+            return FullyQualifiedJavaType.getBooleanPrimitiveInstance();
+        }
+
         return answer;
     }
 
