@@ -38,7 +38,7 @@
 
 <generatorConfiguration>
   <classPathEntry
-          location="/Users/dengxiaolin/.m2/repository/mysql/mysql-connector-java/8.0.17/mysql-connector-java-8.0.17.jar"/>
+          location="/Users/dengxiaolin/.m2/repository/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22.jar"/>
 
   <context id="MysqlTables" targetRuntime="MyBatis3">
     <!--去除注释-->
@@ -46,7 +46,7 @@
       <property name="suppressAllComments" value="true"/>
     </commentGenerator>
     <!--数据库连接-->
-    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+    <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                     connectionURL="jdbc:mysql://192.168.200.120:3306/egenie_cloud_wms"
                     userId="root"
                     password="my-secret-pw">
@@ -70,10 +70,6 @@
 
     <table tableName="wms_performance_record" domainObjectName="WmsPerformanceRecord">
     </table>
-
-
-
-
 
   </context>
 </generatorConfiguration>

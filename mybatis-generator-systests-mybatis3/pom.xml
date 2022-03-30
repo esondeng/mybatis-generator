@@ -85,7 +85,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <!-- 引用依赖库的版本 -->
-            <version>8.0.17</version>
+            <version>8.0.22</version>
           </dependency>
         </dependencies>
 
