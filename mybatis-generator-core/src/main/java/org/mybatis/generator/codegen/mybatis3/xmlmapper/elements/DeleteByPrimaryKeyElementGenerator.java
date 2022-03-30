@@ -33,6 +33,13 @@ public class DeleteByPrimaryKeyElementGenerator extends
 
     @Override
     public void addElements(XmlElement parentElement) {
+        boolean hasValidColumn = introspectedTable.getColumn("valid").isPresent();
+        boolean hasUsableColumn = introspectedTable.getColumn("is_usable").isPresent();
+
+        if(!hasValidColumn && !hasUsableColumn){
+            return;
+        }
+
         XmlElement answer = new XmlElement("update"); //$NON-NLS-1$
 
         answer.addAttribute(new Attribute(

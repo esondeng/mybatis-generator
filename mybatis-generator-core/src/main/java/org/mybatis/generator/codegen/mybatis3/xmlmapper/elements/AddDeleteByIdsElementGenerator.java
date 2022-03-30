@@ -13,6 +13,13 @@ import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
 public class AddDeleteByIdsElementGenerator extends AbstractXmlElementGenerator {
     @Override
     public void addElements(XmlElement parentElement) {
+        boolean hasValidColumn = introspectedTable.getColumn("valid").isPresent();
+        boolean hasUsableColumn = introspectedTable.getColumn("is_usable").isPresent();
+
+        if(!hasValidColumn && !hasUsableColumn){
+            return;
+        }
+
         XmlElement answer = new XmlElement("update");
 
         answer.addAttribute(new Attribute("id", introspectedTable.getDeleteByIdsStatementId()));

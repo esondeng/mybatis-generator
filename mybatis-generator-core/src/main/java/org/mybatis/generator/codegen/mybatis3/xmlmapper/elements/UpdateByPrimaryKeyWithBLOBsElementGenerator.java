@@ -104,7 +104,7 @@ public class UpdateByPrimaryKeyWithBLOBsElementGenerator extends
         if(introspectedTable.getColumn("update_time").isPresent()){
             answer.addElement(new TextElement("  update_time = now()"));
         }
-        else{
+        else if(introspectedTable.getColumn("last_update_time").isPresent()){
             answer.addElement(new TextElement("  last_update_time = now()"));
         }
 

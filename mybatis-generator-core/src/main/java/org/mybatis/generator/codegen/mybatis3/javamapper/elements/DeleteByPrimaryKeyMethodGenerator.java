@@ -38,6 +38,14 @@ public class DeleteByPrimaryKeyMethodGenerator extends
 
     @Override
     public void addInterfaceElements(Interface interfaze) {
+        boolean hasValidColumn = introspectedTable.getColumn("valid").isPresent();
+        boolean hasUsableColumn = introspectedTable.getColumn("is_usable").isPresent();
+
+        if(!hasValidColumn && !hasUsableColumn){
+            return;
+        }
+
+
         Set<FullyQualifiedJavaType> importedTypes = new TreeSet<>();
         Method method = new Method(introspectedTable.getDeleteByPrimaryKeyStatementId());
         method.setVisibility(JavaVisibility.PUBLIC);

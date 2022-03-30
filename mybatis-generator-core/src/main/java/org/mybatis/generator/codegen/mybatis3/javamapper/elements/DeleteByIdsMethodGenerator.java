@@ -18,6 +18,13 @@ import org.mybatis.generator.api.dom.java.Parameter;
 public class DeleteByIdsMethodGenerator extends AbstractJavaMapperMethodGenerator {
     @Override
     public void addInterfaceElements(Interface interfaze) {
+        boolean hasValidColumn = introspectedTable.getColumn("valid").isPresent();
+        boolean hasUsableColumn = introspectedTable.getColumn("is_usable").isPresent();
+
+        if(!hasValidColumn && !hasUsableColumn){
+            return;
+        }
+
         Set<FullyQualifiedJavaType> importedTypes = new TreeSet<>();
         Method method = new Method(introspectedTable.getDeleteByIdsStatementId());
         method.setVisibility(JavaVisibility.PUBLIC);

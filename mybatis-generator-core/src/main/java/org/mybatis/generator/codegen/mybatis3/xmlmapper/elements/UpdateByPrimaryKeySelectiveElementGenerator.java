@@ -101,8 +101,8 @@ public class UpdateByPrimaryKeySelectiveElementGenerator extends
         if(introspectedTable.getColumn("update_time").isPresent()){
             dynamicElement.addElement(new TextElement("  update_time = now()"));
         }
-        else{
-            dynamicElement.addElement(new TextElement("  last_update_time = now()"));
+        else if(introspectedTable.getColumn("last_update_time").isPresent()){
+            answer.addElement(new TextElement("  last_update_time = now()"));
         }
 
         boolean and = false;
