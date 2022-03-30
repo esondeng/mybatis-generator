@@ -38,7 +38,7 @@
 
 <generatorConfiguration>
   <classPathEntry
-          location="D:/mvnrepository/meituan/mysql/mysql-connector-java/8.0.17/mysql-connector-java-8.0.17.jar"/>
+          location="/Users/dengxiaolin/.m2/repository/mysql/mysql-connector-java/8.0.17/mysql-connector-java-8.0.17.jar"/>
 
   <context id="MysqlTables" targetRuntime="MyBatis3">
     <!--去除注释-->
@@ -47,9 +47,9 @@
     </commentGenerator>
     <!--数据库连接-->
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                    connectionURL="jdbc:mysql://192.168.200.97:3306/egenie"
-                    userId="ejltest"
-                    password="testonly2016">
+                    connectionURL="jdbc:mysql://192.168.200.120:3306/egenie_cloud_wms"
+                    userId="root"
+                    password="my-secret-pw">
     </jdbcConnection>
     <!--生成实体类 指定包名-->
     <javaModelGenerator targetPackage="cn.egenie.architect.canal.oms.domain"
@@ -68,7 +68,7 @@
       <property name="enableSubPackages" value="false"/>
     </javaClientGenerator>
 
-    <table tableName="sale_order_detail_finance" domainObjectName="SaleOrderDetailFinance">
+    <table tableName="wms_performance_record" domainObjectName="WmsPerformanceRecord">
     </table>
 
 
