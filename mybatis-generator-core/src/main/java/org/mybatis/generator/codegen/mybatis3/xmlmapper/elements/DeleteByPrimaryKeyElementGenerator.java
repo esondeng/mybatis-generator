@@ -123,7 +123,7 @@ public class DeleteByPrimaryKeyElementGenerator extends
             sb.append(" and is_usable = 1");
         }
         if (hasUsableStateColumn) {
-            sb.append(" set usable_state = 1");
+            sb.append(" and usable_state = 1");
         }
 
         answer.addElement(new TextElement(sb.toString()));
