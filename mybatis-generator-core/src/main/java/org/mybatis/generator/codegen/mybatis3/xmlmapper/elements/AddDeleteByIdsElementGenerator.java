@@ -17,7 +17,7 @@ public class AddDeleteByIdsElementGenerator extends AbstractXmlElementGenerator 
         boolean hasUsableColumn = introspectedTable.getColumn("is_usable").isPresent();
         boolean hasUsableStateColumn = introspectedTable.getColumn("usable_state").isPresent();
 
-        if (!hasValidColumn && !hasUsableColumn) {
+        if (!hasValidColumn && !hasUsableColumn && !hasUsableStateColumn) {
             return;
         }
 

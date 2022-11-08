@@ -85,6 +85,10 @@ public class UpdateByPrimaryKeyWithBLOBsElementGenerator extends
                 continue;
             }
 
+            if (introspectedColumn.getActualColumnName().equals("usable_state")) {
+                continue;
+            }
+
             sb.append(MyBatis3FormattingUtilities.getEscapedColumnName(introspectedColumn));
             sb.append(" = ");
             sb.append(MyBatis3FormattingUtilities
