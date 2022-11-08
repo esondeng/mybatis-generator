@@ -20,8 +20,9 @@ public class DeleteByIdsMethodGenerator extends AbstractJavaMapperMethodGenerato
     public void addInterfaceElements(Interface interfaze) {
         boolean hasValidColumn = introspectedTable.getColumn("valid").isPresent();
         boolean hasUsableColumn = introspectedTable.getColumn("is_usable").isPresent();
+        boolean hasUsableStateColumn = introspectedTable.getColumn("usable_state").isPresent();
 
-        if(!hasValidColumn && !hasUsableColumn){
+        if(!hasValidColumn && !hasUsableColumn && !hasUsableStateColumn){
             return;
         }
 

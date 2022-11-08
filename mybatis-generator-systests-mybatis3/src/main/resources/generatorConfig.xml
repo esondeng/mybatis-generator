@@ -68,7 +68,7 @@
       <property name="enableSubPackages" value="false"/>
     </javaClientGenerator>
 
-    <table tableName="wms_performance_record" domainObjectName="WmsPerformanceRecord">
+    <table tableName="performance_order_config" domainObjectName="PerformanceOrderConfig">
     </table>
 
   </context>

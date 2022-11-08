@@ -35,8 +35,9 @@ public class DeleteByPrimaryKeyElementGenerator extends
     public void addElements(XmlElement parentElement) {
         boolean hasValidColumn = introspectedTable.getColumn("valid").isPresent();
         boolean hasUsableColumn = introspectedTable.getColumn("is_usable").isPresent();
+        boolean hasUsableStateColumn = introspectedTable.getColumn("usable_state").isPresent();
 
-        if(!hasValidColumn && !hasUsableColumn){
+        if (!hasValidColumn && !hasUsableColumn) {
             return;
         }
 
@@ -67,23 +68,28 @@ public class DeleteByPrimaryKeyElementGenerator extends
         StringBuilder sb = new StringBuilder();
         sb.append("update "); //$NON-NLS-1$
         sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
-        boolean isHasValidColumn = introspectedTable.getColumn("valid").isPresent();
+
         boolean hasLastUpdater = introspectedTable.getColumn("last_updater").isPresent();
         boolean hasLastUpdateTime = introspectedTable.getColumn("last_update_time").isPresent();
 
-        if(isHasValidColumn){
+        if (hasValidColumn) {
             sb.append(" set valid = 0, ");
         }
-        else{
+
+        if (hasUsableColumn) {
             sb.append(" set is_usable = 0, ");
         }
 
-        if(hasLastUpdater){
+        if (hasUsableStateColumn) {
+            sb.append(" set usable_state = 0, ");
+        }
+
+        if (hasLastUpdater) {
             String jdbcType = introspectedTable.getColumn("last_updater").get().getJdbcTypeName();
             sb.append("hasLastUpdater = #{hasLastUpdater,jdbcType=").append(jdbcType).append("}, ");
         }
 
-        if(hasLastUpdateTime){
+        if (hasLastUpdateTime) {
             sb.append("last_update_time = now()");
         }
         else {
@@ -110,12 +116,14 @@ public class DeleteByPrimaryKeyElementGenerator extends
             sb.append(MyBatis3FormattingUtilities.getParameterClause(introspectedColumn));
         }
 
-        if(isHasValidColumn){
+        if (hasValidColumn) {
             sb.append(" and valid = 1");
         }
-        else
-        {
+        if (hasUsableColumn) {
             sb.append(" and is_usable = 1");
+        }
+        if (hasUsableStateColumn) {
+            sb.append(" set usable_state = 1");
         }
 
         answer.addElement(new TextElement(sb.toString()));
